@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Kurv">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon.png">
+<title>Kurv</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+<header>
+  <div class="hrow">
+    <h1>Kurv</h1>
+    <select id="groupSel" aria-label="Active lookout list"></select>
+  </div>
+  <div id="snapshot" class="snapshot"><span class="dot"></span>Loading…</div>
+</header>
+
+<main>
+
+  <section class="panel" id="panel-shop">
+    <div id="shopBody"></div>
+    <h2>Find a product</h2>
+    <input id="q" placeholder="Three letters or more — pasta, æg, letmælk" autocomplete="off" autocorrect="off" spellcheck="false">
+    <div class="storefilter" id="stores"></div>
+    <div id="results" style="margin-top:12px"></div>
+  </section>
+
+  <section class="panel" id="panel-stock">
+    <div id="stockBody"></div>
+  </section>
+
+  <section class="panel" id="panel-ledger">
+    <div id="ledgerBody"></div>
+  </section>
+
+  <section class="panel" id="panel-setup">
+    <div id="setupBody"></div>
+    <input type="file" id="importFile" accept="application/json" hidden>
+  </section>
+
+</main>
+
+<nav>
+  <button data-tab="shop"><span class="g">◎</span>Shop</button>
+  <button data-tab="stock"><span class="g">▤</span>Stock</button>
+  <button data-tab="ledger"><span class="g">◺</span>Ledger</button>
+  <button data-tab="setup"><span class="g">⚙</span>Setup</button>
+</nav>
+
+<div class="modal" id="buyModal">
+  <div class="sheet">
+    <h3 id="buyTitle">Item</h3>
+    <div class="muted" id="buySub"></div>
+
+    <div style="margin-top:14px" class="f2">
+      <div class="field"><label>Date</label><input id="buyDate" type="date"></div>
+      <div class="field"><label>Packs</label><input id="buyPacks" type="number" min="1" step="1" value="1"></div>
+    </div>
+    <div class="field">
+      <label id="buyUnitsLabel">Units per pack</label>
+      <input id="buyUnits" type="number" step="any" min="0">
+      <div class="hint" id="buyUnitsHint"></div>
+    </div>
+
+    <details style="margin:4px 0 12px">
+      <summary class="muted">Shelf life just for this lot</summary>
+      <div class="f2" style="margin-top:10px">
+        <div class="field"><label>Days unopened</label><input id="buyShelf" type="number" min="1" placeholder="list default"></div>
+        <div class="field"><label>Days once open</label><input id="buyOpened" type="number" min="1" placeholder="list default"></div>
+      </div>
+    </details>
+
+    <div id="buyPreview"></div>
+
+    <div class="btn-row" style="margin-top:14px;justify-content:flex-end">
+      <button class="btn ghost" data-act="closesheet">Cancel</button>
+      <button class="btn" data-act="confirmbuy">Log purchase</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script src="app.js"></script>
+<script src="view.js"></script>
+</body>
+</html>
